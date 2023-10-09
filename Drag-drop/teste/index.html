@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: ;
+
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: palevioletred;
+            color: white;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="box1" class="box" draggable="true">caixa 1</div>
+        <div id="box2" class="box" draggable="true">caixa 2</div>
+    </div>
+
+    <script>
+        const box1 = document.getElementById('box1')
+        const box2 = document.getElementById('box2')
+
+        box1.addEventListener('dragstart', function (event) {
+            event.dataTransfer.setdata('text/pain', 'box1')
+        })
+
+        box2.addEventListener('dragstar', function (event) {
+            event.dataTransfer.setdata('text/plain', 'box2')
+        })
+
+        box1.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        })
+        box2.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        })
+        box1.addEventListener('drop', function (event) {
+            const id = event.dataTransfer.getdata('text')
+            if (id === 'box2') {
+                box1.parentNode.insertBefore(box1, box2);
+            }
+        })
+
+        box2.addEventListener('drop', function (event) {
+            const id = event.dataTransfer.getdata('text')
+            if (id === 'box1') {
+                box2.parentNode.insertBefore(box1, box2);
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
